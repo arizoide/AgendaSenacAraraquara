@@ -20,6 +20,20 @@
         android:layout_height="wrap_content"
         android:hint="Telefone"/>
 
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail" />
+
+    <RatingBar
+        android:id="@+id/pontuacaoRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:max="10"
+        android:layout_gravity="center" />
+
     <Button
         android:id="@+id/salvarContatoButton"
         android:layout_width="match_parent"
