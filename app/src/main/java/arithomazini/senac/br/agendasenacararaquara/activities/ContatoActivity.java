@@ -1,4 +1,4 @@
-package arithomazini.senac.br.agendasenacararaquara;
+package arithomazini.senac.br.agendasenacararaquara.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import arithomazini.senac.br.agendasenacararaquara.R;
+import arithomazini.senac.br.agendasenacararaquara.dao.ContatoDAO;
+import arithomazini.senac.br.agendasenacararaquara.model.ContatoEntity;
+import arithomazini.senac.br.agendasenacararaquara.model.EnderecoEntity;
 
 public class ContatoActivity extends AppCompatActivity {
 
@@ -29,25 +34,35 @@ public class ContatoActivity extends AppCompatActivity {
                 //Recuperar o texto dos EditText
                 //Objetos da tela
 
-                //Edit Text
+                //Edit Text - Contato
                 EditText nomeEditText = findViewById(R.id.nomeEditText);
                 EditText telefoneEditText = findViewById(R.id.telefoneEditText);
-                EditText emailEditText = findViewById(R.id.emailEditText);
+
+                //Edit Text - Endereco
+                EditText ruaEditText = findViewById(R.id.ruaEditText);
+                EditText numeroEditText = findViewById(R.id.numeroEditText);
+                EditText cidadeEstadoEditText = findViewById(R.id.cidadeEstadoEditText);
 
                 //Rating Bar
                 RatingBar pontuacaoRatingBar = findViewById(R.id.pontuacaoRatingBar);
 
                 //Texto que estavam presentes nos objetos
-                String nome = nomeEditText.getText().toString();
-                String telefone = telefoneEditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String pontuacao = String.valueOf(pontuacaoRatingBar.getRating());
+                ContatoEntity contato = new ContatoEntity(nomeEditText.getText().toString(),
+                        telefoneEditText.getText().toString(),
+                        Double.valueOf(pontuacaoRatingBar.getProgress()));
+
+                ContatoDAO contatoDAO = new ContatoDAO(ContatoActivity.this);
+                contatoDAO.salvar(contato);
+
+                //Criar a entidade de endereco
+                EnderecoEntity endereco = new EnderecoEntity(ruaEditText.getText().toString(),
+                        numeroEditText.getText().toString(),
+                        cidadeEstadoEditText.getText().toString());
 
                 //Exibe uma mensagem
                 Toast.makeText(ContatoActivity.this,
-                        "Contato Salvo! Nome: " + nome + " - Tel: " + telefone
-                                + " - E-mail: " + email + "Pontuacao: " + pontuacao,
-                        Toast.LENGTH_SHORT).show();
+                        "Contato Salvo!",
+                        Toast.LENGTH_LONG).show();
 
                 //Finaliza a activity atual e volta para a MainActivity
                 finish();
@@ -56,3 +71,4 @@ public class ContatoActivity extends AppCompatActivity {
 
     }
 }
+
