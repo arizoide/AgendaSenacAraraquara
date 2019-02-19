@@ -1,5 +1,6 @@
 package arithomazini.senac.br.agendasenacararaquara.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import arithomazini.senac.br.agendasenacararaquara.R;
 import arithomazini.senac.br.agendasenacararaquara.dao.ContatoDAO;
+import arithomazini.senac.br.agendasenacararaquara.dao.EnderecoDAO;
 import arithomazini.senac.br.agendasenacararaquara.model.ContatoEntity;
 import arithomazini.senac.br.agendasenacararaquara.model.EnderecoEntity;
 
@@ -59,12 +61,17 @@ public class ContatoActivity extends AppCompatActivity {
                         numeroEditText.getText().toString(),
                         cidadeEstadoEditText.getText().toString());
 
+                EnderecoDAO enderecoDAO = new EnderecoDAO(ContatoActivity.this);
+                enderecoDAO.salvar(endereco);
+
                 //Exibe uma mensagem
                 Toast.makeText(ContatoActivity.this,
                         "Contato Salvo!",
                         Toast.LENGTH_LONG).show();
 
                 //Finaliza a activity atual e volta para a MainActivity
+                Intent main = new Intent(ContatoActivity.this, MainActivity.class);
+                startActivity(main);
                 finish();
             }
         });
