@@ -3,6 +3,9 @@ package arithomazini.senac.br.agendasenacararaquara.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,21 +24,22 @@ public class ContatoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contato);
+    }
 
-        // ******************************
-        // Acao de click no salvar
-        // ******************************
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contato_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        //Recupero o botao de salvar
-        Button salvarContatoButton = findViewById(R.id.salvarContatoButton);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        salvarContatoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        switch (item.getItemId()){
+            case R.id.salvar_contato_menu_item:
                 //Recuperar o texto dos EditText
                 //Objetos da tela
-
                 //Edit Text - Contato
                 EditText nomeEditText = findViewById(R.id.nomeEditText);
                 EditText telefoneEditText = findViewById(R.id.telefoneEditText);
@@ -73,9 +77,10 @@ public class ContatoActivity extends AppCompatActivity {
                 Intent main = new Intent(ContatoActivity.this, MainActivity.class);
                 startActivity(main);
                 finish();
-            }
-        });
+                break;
+        }
 
+        return super.onOptionsItemSelected(item);
     }
 }
 
