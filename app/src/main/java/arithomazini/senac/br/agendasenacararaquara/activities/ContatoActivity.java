@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -60,7 +58,6 @@ public class ContatoActivity extends AppCompatActivity {
                 ContatoDAO contatoDAO = new ContatoDAO(ContatoActivity.this);
                 contatoDAO.salvar(contato);
 
-                //Criar a entidade de endereco
                 EnderecoEntity endereco = new EnderecoEntity(ruaEditText.getText().toString(),
                         numeroEditText.getText().toString(),
                         cidadeEstadoEditText.getText().toString());

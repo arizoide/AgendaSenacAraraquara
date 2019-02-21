@@ -1,7 +1,6 @@
 package arithomazini.senac.br.agendasenacararaquara.model;
 
 public class EnderecoEntity {
-
     private Integer id;
     private String rua;
     private String numero;
