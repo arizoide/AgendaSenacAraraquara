@@ -53,4 +53,35 @@ public class ContatoDAO {
 
         return contatos;
     }
+
+    public List<ContatoEntity> listar(String nome){
+        sqLiteDatabase = sqLiteHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM CONTATO WHERE NOME = '"+ nome + "';";
+
+        Cursor c = sqLiteDatabase.rawQuery(sql, null);
+
+        List<ContatoEntity> contatos = new ArrayList<>();
+
+        while (c.moveToNext()){
+            ContatoEntity contato = new ContatoEntity();
+            contato.setId(c.getInt(c.getColumnIndex("ID")));
+            contato.setNome(c.getString(c.getColumnIndex("NOME")));
+            contato.setTelefone(c.getString(c.getColumnIndex("TELEFONE")));
+            contato.setPontuacao(c.getDouble(c.getColumnIndex("PONTUACAO")));
+
+            contatos.add(contato);
+        }
+
+        return contatos;
+    }
+
+    public void remover(ContatoEntity contato){
+        sqLiteDatabase = sqLiteHelper.getWritableDatabase();
+
+        sqLiteDatabase.delete("CONTATO", "ID = ?", new String[]{contato.getId().toString()});
+
+        sqLiteDatabase.close();
+
+    }
 }
